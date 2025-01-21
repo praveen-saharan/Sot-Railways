@@ -1,19 +1,20 @@
-# Railways Ticketing System
+# 🚂 Railways Ticketing System
+<img src="./frontend/public/Picture1.png" alt="LogiPredict" height="50px">
 
 ## 📋 Project Overview
 
 ### **Purpose**
-The **Railways Ticketing System** is developed to simplify and streamline the process of booking and managing railway tickets. It allows users to register, log in, create, view, and manage tickets, while providing an admin interface for user and ticket management. The system ensures efficient tracking and seamless booking for a better customer experience.
+The **Railways Ticketing System** is designed to revolutionize the way railway tickets are booked and managed. Users can effortlessly register, log in, and handle their tickets, while admins get a powerful interface for overseeing users and tickets. This system promises efficient tracking and a seamless booking experience for all.
 
-### **Scope**
-This project includes:
+<!-- ### **Scope**
+This project encompasses:
 - **User Roles:** Regular users and administrators.
 - **Features:** Ticket creation, viewing, updating, deletion, user management, and role-based access control.
 - **Key Functionalities:**
-  - **User Registration/Login**: Users can sign up, log in, and manage their accounts.
-  - **Ticket Management**: Users can create, view, update, and delete their tickets.
-  - **Admin Panel**: Admins have control over user accounts and ticket data.
-  - **Role-based Access Control**: Different access levels for users and admins.
+  - **User Registration/Login**: Sign up, log in, and manage accounts with ease.
+  - **Ticket Management**: Create, view, update, and delete tickets effortlessly.
+  - **Admin Panel**: Full control over user accounts and ticket data for admins.
+  - **Role-based Access Control**: Tailored access levels for users and admins.
   
 ### **Tech Stack**
 - **Frontend**: React
@@ -24,32 +25,95 @@ This project includes:
 
 ---
 
-## 🏗️ System Architecture
-
+## 📽️ System Architecture
 
 ### **Explanation**
-- **Frontend** communicates with the **Backend** using RESTful APIs to fetch data or perform actions like ticket creation, update, and deletion.
-- The **Backend** interacts with the **Database** via **JDBC** to store and retrieve user and ticket information.
-- **Frontend** and **Backend** are decoupled, making the system scalable and maintainable.
+- The **Frontend** communicates with the **Backend** via RESTful APIs to perform actions like ticket creation, update, and deletion.
+- The **Backend** interacts with the **Database** using **JDBC** to manage user and ticket data.
+- The decoupled **Frontend** and **Backend** ensure scalability and maintainability.
 
 ---
 
 ## 🌟 Features and Requirements
 
 ### **Functional Requirements**
-- **User registration/login**: Users can create an account and authenticate using username and password.
-- **Ticket Management**: Users can create new tickets, view existing ones, update their information, and delete tickets.
-- **Admin Panel**: Admins can manage users and tickets, ensuring system integrity.
+- **User registration/login**: Create an account and authenticate with a username and password.
+- **Ticket Management**: Create, view, update, and delete tickets.
+- **Admin Panel**: Manage users and tickets to maintain system integrity.
 - **Role-based Access Control**: Different roles (admin, user) control access to specific actions.
 
 ### **Non-Functional Requirements**
-- **Scalability**: The system should handle a growing number of users and tickets efficiently.
-- **Security**: Passwords should be securely hashed, and sensitive data must be protected.
-- **Responsive Design**: The application should be mobile-friendly, supporting all device sizes.
+- **Scalability**: Efficiently handle a growing number of users and tickets.
+- **Security**: Securely hash passwords and protect sensitive data.
+- **Responsive Design**: Mobile-friendly application supporting all device sizes.
 
----
+--- -->
 
-## 🗃️ Database Design
+<!-- ## 📃 Database Design
 
+# Railways_Ticketing_System Project
+ -->
 
+## 🚀 Setup and Installation
 
+### Prerequisites
+
+- Node.js (>= 18.x)
+- npm or yarn
+
+### Installation
+
+Follow these steps to set up the project locally.
+
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/praveen-saharan/Railways_Ticketing_System.git
+cd Railways_Ticketing_System
+```
+
+#### 2. Navigate to the Project Directory
+
+- **Frontend**:
+
+  ```bash
+  cd frontend
+  ```
+
+#### 3. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+#### 4. Run the Development Server
+
+- **Frontend**:
+
+  ```bash
+  npm run dev
+  # or
+  yarn dev
+  ```
+
+#### 5. Access the App
+
+- **Frontend**: Open your browser and navigate to `http://localhost:5173`
+
+### Troubleshooting
+
+If you encounter any issues during installation or while running the project, consider the following:
+
+- Ensure all dependencies are installed by running `npm install` or `yarn install`.
+- Make sure that port `5173` (frontend) is not in use by other applications.
+- Check the terminal/console output for any error messages and resolve them as indicated.
+
+## 🤝 Contributing
+
+1. Fork the project.
+2. Create a feature branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a Pull Request.
