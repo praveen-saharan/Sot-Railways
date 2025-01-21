@@ -26,9 +26,6 @@ This project includes:
 
 ## 🏗️ System Architecture
 
-### **Architecture Diagram**
-
-![System Architecture](link-to-architecture-diagram.png)
 
 ### **Explanation**
 - **Frontend** communicates with the **Backend** using RESTful APIs to fetch data or perform actions like ticket creation, update, and deletion.
@@ -54,8 +51,5 @@ This project includes:
 
 ## 🗃️ Database Design
 
-### **ER Diagram**
-![ER Diagram](link-to-er-diagram.png)
 
-### **Schema**
 
