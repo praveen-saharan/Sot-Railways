@@ -1,4 +1,4 @@
-# 🚂 Railways Ticketing System
+# Railways Ticketing System
 <img src="./frontend/public/Picture1.png" alt="LogiPredict" height="50px">
 
 ## 📋 Project Overview
