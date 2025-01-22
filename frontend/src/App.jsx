@@ -5,8 +5,8 @@ import Contact from './Pages/Contact';
 import Login from './Pages/Login';
 
 import NotExist from "./Components/NotExist";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 import TrainSchedule from './Pages/User/TrainSchedule';
 import Booking from './Pages/User/Booking';
