@@ -2,21 +2,35 @@ import React from "react";
 
 const NotExist = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-primary text-light px-4">
       <div className="text-center">
-        <h1 className="text-6xl font-extrabold text-red-600 mb-4">404</h1>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-          Page Not Found
+        {/* Error Code */}
+        <h1 className="text-9xl font-extrabold text-accent mb-6">404</h1>
+
+        {/* Error Message */}
+        <h2 className="text-3xl font-semibold mb-4 text-highlight">
+          Oops! Page Not Found
         </h2>
-        <p className="text-gray-600 mb-6">
-          Sorry, the page you're looking for doesn't exist.
+        <p className="text-lg text-secondary mb-8">
+          Sorry, the page you're looking for doesn't exist or has been moved.
         </p>
+
+        {/* Navigation Button */}
         <a
           href="/"
-          className="inline-block px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+          className="inline-block px-8 py-3 text-lg font-medium text-light bg-accent rounded-lg shadow-lg hover:bg-highlight transition duration-300"
         >
-          Go Back to Home
+          Return to Home
         </a>
+      </div>
+
+      {/* Decorative Illustration */}
+      <div className="mt-12">
+        <img
+          src="https://via.placeholder.com/400x300?text=404+Illustration"
+          alt="Page Not Found Illustration"
+          className="max-w-full h-auto rounded-lg shadow-md"
+        />
       </div>
     </div>
   );

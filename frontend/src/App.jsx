@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Home from './Pages/Home';
+import Home from './pages/Home';
 import Contact from './Pages/Contact';
-import Login from './Pages/Login';
+import Login from './pages/Login';
 
 import NotExist from "./Components/NotExist";
-import Navbar from "./Components/Navbar";
+import Navbar from "./components/Navbar";
 
 import TrainSchedule from './Pages/User/TrainSchedule';
 import Booking from './Pages/User/Booking';
@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
       <Navbar/>
-      <div className="text-center mt-24">
+      <div className="text-center mt-22">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
