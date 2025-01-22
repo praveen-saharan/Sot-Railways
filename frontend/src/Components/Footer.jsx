@@ -7,7 +7,12 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} Railway Ticketing Platform. All
           rights reserved.
         </p>
+        <p>
+          &copy; {new Date().getFullYear()} Railway Ticketing Platform. All
+          rights reserved.
+        </p>
       </footer>
+      
     );
 };
 
