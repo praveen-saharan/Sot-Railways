@@ -11,7 +11,7 @@ const NotExist = () => {
         <h2 className="text-3xl font-semibold mb-4 text-highlight">
           Oops! Page Not Found
         </h2>
-        <p className="text-lg text-secondary mb-8">
+        <p className="text-lg text-gray-200 mb-8">
           Sorry, the page you're looking for doesn't exist or has been moved.
         </p>
 
@@ -24,14 +24,6 @@ const NotExist = () => {
         </a>
       </div>
 
-      {/* Decorative Illustration */}
-      <div className="mt-12">
-        <img
-          src="https://via.placeholder.com/400x300?text=404+Illustration"
-          alt="Page Not Found Illustration"
-          className="max-w-full h-auto rounded-lg shadow-md"
-        />
-      </div>
     </div>
   );
 };

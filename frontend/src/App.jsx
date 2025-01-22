@@ -6,6 +6,7 @@ import Login from './pages/Login';
 
 import NotExist from "./Components/NotExist";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 import TrainSchedule from './Pages/User/TrainSchedule';
 import Booking from './Pages/User/Booking';
@@ -46,6 +47,7 @@ function App() {
           <Route path="*" element={<NotExist />} />
         </Routes>
       </div>
+      <Footer/>
     </Router>
   );
 }
