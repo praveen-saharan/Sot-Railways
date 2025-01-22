@@ -14,12 +14,12 @@ const Home = () => {
           check train schedules, and manage your bookings effortlessly.
         </p>
         <div className="mt-8 flex gap-4">
-          <button className="bg-accent hover:bg-highlight text-light font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 animate-fadeIn">
+          <a href="booking" className="bg-accent hover:bg-highlight text-light font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 animate-fadeIn">
             Book Tickets
-          </button>
-          <button className="bg-secondary hover:bg-accent text-light font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 animate-fadeIn">
+          </a>
+          <a href="train-schedule" className="bg-secondary hover:bg-accent text-light font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 animate-fadeIn">
             View Schedule
-          </button>
+          </a>
         </div>
       </section>
 
