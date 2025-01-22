@@ -1,23 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
+import Home from './Pages/Home';
+import Contact from './Pages/Contact';
+import Login from './Pages/Login';
 
 import NotExist from "./Components/NotExist";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-import TrainSchedule from './pages/User/TrainSchedule';
-import Booking from './pages/User/Booking';
-import BookingSummary from './pages/User/BookingSummary';
-import Payment from './pages/User/Payment';
-import Ticket from './pages/User/Ticket';
+import TrainSchedule from './Pages/User/TrainSchedule';
+import Booking from './Pages/User/Booking';
+import BookingSummary from './Pages/User/BookingSummary';
+import Payment from './Pages/User/Payment';
+import Ticket from './Pages/User/Ticket';
 
-import PassengerList from './pages/Admin/PassengerList';
-import FinancialReports from './pages/Admin/FinancialReports';
-import ScheduleEdit from './pages/Admin/ScheduleEdit';
-import TicketEdit from './pages/Admin/TicketEdit';
+import PassengerList from './Pages/Admin/PassengerList';
+import FinancialReports from './Pages/Admin/FinancialReports';
+import ScheduleEdit from './Pages/Admin/ScheduleEdit';
+import TicketEdit from './Pages/Admin/TicketEdit';
 
 function App() {
   return (
