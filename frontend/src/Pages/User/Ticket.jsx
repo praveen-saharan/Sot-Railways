@@ -1,7 +1,17 @@
 import React from 'react';
 
 const Ticket = () => {
-  const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+  // Static booking data
+  const bookingData = {
+    name: "John Doe",
+    train: {
+      name: "Express Train",
+      fare: 500,
+    },
+    seatPreference: "Window",
+    contact: "1234567890",
+    paymentMethod: "Credit Card",
+  };
 
   return (
     <div className="max-w-4xl mx-auto mt-8 bg-secondary p-6 rounded-lg shadow-md">

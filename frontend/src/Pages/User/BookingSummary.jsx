@@ -1,12 +1,23 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
 
 const BookingSummary = () => {
-  // const history = useHistory();
-  const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+  // Static booking data
+  const bookingData = {
+    name: "John Doe",
+    age: 30,
+    gender: "Male",
+    seatPreference: "Window",
+    contact: "1234567890",
+    train: {
+      name: "Express Train",
+      fare: 500,
+    },
+  };
 
   const handleConfirm = () => {
+    // Navigate to payment page (commented out for now)
     // history.push('/payment');
+    console.log('Proceeding to payment...');
   };
 
   return (

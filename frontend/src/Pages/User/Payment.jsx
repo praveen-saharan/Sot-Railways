@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
-  // const history = useHistory();
-  const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+  
+  // Static booking data
+  const bookingData = {
+    train: {
+      name: "Express Train",
+      fare: 500,
+    },
+  };
 
   const handlePayment = () => {
     if (paymentMethod) {
-      // history.push('/ticket');
+      console.log('Proceeding to ticket...');
+      // history.push('/ticket'); // Uncomment this when using routing
+    } else {
+      console.log('Please select a payment method');
     }
   };
 
