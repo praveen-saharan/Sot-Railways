@@ -1,10 +1,11 @@
 import React from 'react';
+import '../Footer.css'
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-light py-4 mt-auto">
-      <div className="max-w-6xl mx-auto text-center">
-        <p>&copy; 2025 Railway Ticketing Platform | All Rights Reserved</p>
+    <footer className="custom-footer">
+      <div className="custom-title">
+        <p>&copy; Railway Ticketing Platform 2025 | All Rights Reserved</p>
       </div>
     </footer>
   );
