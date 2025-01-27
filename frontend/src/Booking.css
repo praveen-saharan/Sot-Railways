@@ -1,0 +1,456 @@
+
+body{
+  background-color: #F2E6FF;
+}
+
+
+/* .header {
+    display: block;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+  } */
+
+  .header {
+    background-color: white;
+    display: flex;
+    flex-direction: row; /* Ensures horizontal layout within the header */
+    justify-content: flex-start; /* Aligns logo, title, and admin container */
+    align-items: center; /* Centers items vertically */
+    padding: 10px; /* Add some padding to the header */
+    height: 50px;
+  }
+  
+  .logo-container {
+    width: 82.24px;
+    height: 73.36px;
+    margin-left: 15px;
+    margin-top: 20px;
+    /* position: absolute;
+    top: 25px;
+    left: 43px; */
+  }
+  
+  .logo {
+    width: 70%;
+    height: 70%;
+    opacity: 1; /* Assuming opacity is 1, set as needed */
+  }
+  
+  .header-title {
+    font-family: var(--sds-typography-title-hero-font-family);
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 43.2px;
+    text-align: left;
+    color: #56036B;
+  }
+  
+  .admin-container {
+    padding: 0 20px;
+    margin-left: auto;
+    /* position: absolute;
+    top: 47px;
+    right: 43px; Adjust as necessary for alignment */
+  }
+  
+  .admin-text {
+    font-family: var(--sds-typography-heading-font-family);
+    font-size: var(--sds-typography-heading-size-base);
+    font-weight: 600;
+    line-height: 28.8px;
+    text-align: left;
+    /* margin-left: auto; */
+    /* position: relative;
+    bottom: 18px; */
+    letter-spacing: -0.02em;
+    color: #56036B;
+    opacity: 1; /* Set opacity as needed */
+  }
+
+  .main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 100px;
+    position: relative;
+    bottom: 50px;
+  }
+
+  
+  .complete-booking {
+    text-align: left; /* Align text to the left */
+    font-size: 20px;
+    margin: 10px;
+  }
+
+  .booking-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 130%; /* Adjust width as needed */
+    /* height: 100px; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .booking-date {
+    font-size: 20px;
+    font-weight: 700;
+    color: #5E239D;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  .booking-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .station-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    position: relative;
+  }
+  
+  .station {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  
+
+  .station-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #F5F5F5; /* Matches the background color */
+    border: 1px solid #9609B9; /* Colored border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index:2; /* Ensures proper alignment if any content is added inside */
+  }
+
+  .station-circle2 {
+    position:relative;
+    width: 10px;
+    height: 10px;
+     top: 60px;
+    border-radius: 50%;
+    background: #F5F5F5; /* Matches the background color */
+    border: 1px solid #9609B9; /* Colored border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index:2; /* Ensures proper alignment if any content is added inside */
+  }
+
+  .station-line {
+    position: absolute;
+    top:17px;
+    left:3px;
+  /* Adjust based on the position of your circles */
+     /* Center the line relative to the circles */
+    width: 1px; /* Thin line */
+    height: 110px; /* Adjust height to connect the circles */
+    background-color:  #9609B9; 
+    z-index: 1;/* Same color as the circle border */
+  }
+  
+/* .station-line {
+width: 97px;
+height: 0px;
+top: 516px;
+left: 149px;
+gap: 0px;
+border: 1px 0px 0px 0px;
+opacity: 0px;
+background-color:  #9609B9; 
+
+} */
+
+  .station-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+
+  .station-name2 {
+    position: absolute;
+    top:32px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 20px;
+  }
+  
+  .travel-time {
+    font-size: 14px;
+    font-weight: 400;
+    color: #888;
+     position: relative;
+     right: 70px;
+     top: 20px;
+    /* position: absolute; */
+    /* left:200px; */
+    margin-left: 0px;
+    margin-top: -5px /* Aligns with station name */
+  }
+  
+  .illustration img {
+    max-width: 200px;
+    height: 150px;
+  }
+
+
+  /* .fare-summary {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 35%; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }  */
+
+  .fare-summary {
+    position: relative;
+    right: 250px;
+  }
+
+  .booking-section{
+    position: relative;
+    left: 100px;
+  }
+
+  .fare-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 130%; /* Adjust width as needed */
+    /* height: 100px; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .fare-icon {
+    width: 10px; /* From Figma layout */
+    height: 10px; /* From Figma layout */
+    /* margin-right: 8px;  */
+    opacity: 1; /* Ensure the icon is visible */
+  }
+
+
+  .fare-item {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+  }
+  
+  .fare-label {
+    position:relative;
+    font-size: 16px;
+    top:-7px;
+    color: black;
+  }
+  
+  .fare-amount {
+    font-size: 16px;
+    color: black;
+    margin-left: auto;
+  }
+  
+ .payment-icon {
+
+  width: 15px;
+  height: 15px;
+    
+ }
+
+ .payment-label {
+   position: relative;
+   bottom: 20px;
+   right: 10px;
+ }
+
+ .payment-options {
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+}
+
+.payment-option input {
+  margin-right: 8px; /* Adjust the space between checkbox and label */
+  display: none;
+}
+
+/* .payment-method {
+  position: relative;
+  top: 20px;
+} */
+
+
+.payment-option label {
+  position: relative;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.payment-option label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px; /* Circle size */
+  height: 10px; /* Circle size */
+  border: 1px solid;
+  border-radius: 50%; /* Make it circular */
+  border-color: black;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.payment-option input:checked + label:before {
+  background-color: #9609B9; /* Circle color when checked */
+  /* border-color: #000;  */
+}
+
+
+.proceed-to-payment {
+  position: relative;
+  top: 20px;
+  left: 40px;
+  display: inline-block;
+}
+
+.payment-button {
+  padding: 15px 30px;
+  width: 100%;
+  height: 100%;
+  background-color:  #B520DA;
+  border-radius: 30px 30px 30px 30px; /* Border radius */
+  color: white; /* Text color */
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  opacity: 1; /* Visibility */
+}
+
+.payment-button:hover {
+  background-color: #7e059f; /* Slightly darker color on hover */
+}
+
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: #56036b;
+  border-color: white;
+  border-width: 2px;
+  text-align: centre;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 500px;
+  height: 300px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popup-close {
+  background: black;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.popup-icon {
+  width: 50px;
+  margin: 10px auto;
+  display: block;
+}
+
+.amount-input {
+  width: 80%;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 10px;
+}
+
+.popup-submit {
+  background: #9609b9;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.popup-cancel{
+  background: #9609b9;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.popup-submit:hover {
+  background: #7a06a2;
+}
+
+.input-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yen-symbol {
+  margin-right: 10px; /* Adds spacing between the yen sign and the input box */
+  font-size: 18px;
+  color: #fff;
+}
+
+.amount-input {
+  width: 40%;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+}
+
+
