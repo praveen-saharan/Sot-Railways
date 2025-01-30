@@ -24,7 +24,11 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
+
+        {/* <Navbar /> */}
+
       
+
 
         <div className="flex-1 text-center mt-22">
           <Routes>
@@ -50,7 +54,7 @@ function App() {
           </Routes>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
