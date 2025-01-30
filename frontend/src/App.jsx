@@ -7,6 +7,7 @@ import Login from "./Pages/Login";
 import NotExist from "./Components/NotExist";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import LoadingScreen from "./Pages/Loading";
 
 import TrainSchedule from "./Pages/User/TrainSchedule";
 import Booking from "./Pages/User/Booking";
@@ -35,7 +36,7 @@ function App() {
             <Route path="/train-schedule" element={<TrainSchedule />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/booking-summary" element={<BookingSummary />} />
-            <Route path="/payment" element={<Payment />} />
+            <Route path="/payment" element={<LoadingScreen />} />
             <Route path="/ticket" element={<Ticket />} />
 
             {/* Admin pages */}
