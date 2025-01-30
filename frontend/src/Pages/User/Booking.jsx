@@ -309,7 +309,7 @@ const Booking = () => {
         description: "Your payment was successful!",
       })
       navigate("/ticket", {
-        state: { responseData },
+        state: { requestData },
       });
     
       
