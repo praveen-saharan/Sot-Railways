@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
       import { useNavigate } from "react-router-dom"; // Importing useNavigate
       import trainBg from "../assets/Background_Image.png"; 
       import logo from "../assets/Picture1.png"; 
+      import { Link } from "react-router-dom";
       
       const ApiData = [
         { "id": 1, "stationName": "Central Station","source": "Tokyo Station", "stopNumber": 3, "fareAmount": 155, "travelTime": "35" }, 
@@ -64,9 +65,9 @@ import React, { useState, useEffect } from "react";
                 <img src={logo} alt="Logo" className="h-8" />
                 <span className="text-xl font-bold">SoT Railway Ticketing System</span>
               </div>
-              <button className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-sm font-medium">
-                ADMIN
-              </button>
+              <Link to="/login"  className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-sm font-medium">
+          ADMIN
+        </Link>
             </nav>
       
             <main className="flex-grow flex flex-col items-center justify-center mt-20">

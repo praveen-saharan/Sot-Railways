@@ -10,7 +10,6 @@ const { Title, Text } = Typography;
 
 const Ticket = () => {
   const navigate = useNavigate();
-  // Static booking data
   const bookingData = {
     amount: 220,
     cardNumber: "XXXX-XXXX-3085",
@@ -18,9 +17,9 @@ const Ticket = () => {
     userFirstname: "John",
     userLastname: "Doe",
     destinationName: "Kamata",
-    travelTime: "14",  // Travel time in minutes
+    travelTime: "14",  
     source: "Tokyo",
-    bookingTime: "2021-09-15T12:00:00",  // Booking date
+    bookingTime: "2021-09-15T12:00:00",  
   };
 
   const [arrivalTimeString, setArrivalTimeString] = useState('');

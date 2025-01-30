@@ -15,6 +15,7 @@ import BookingSummary from "./Pages/User/BookingSummary";
 import Payment from "./Pages/User/Payment";
 import Ticket from "./Pages/User/Ticket";
 
+import Admin from "./Pages/Admin/AdminHome";
 import PassengerList from "./Pages/Admin/PassengerList";
 import FinancialReports from "./Pages/Admin/FinancialReports";
 import ScheduleEdit from "./Pages/Admin/ScheduleEdit";
@@ -44,6 +45,7 @@ function App() {
             <Route path="/ticket" element={<Ticket />} />
 
             {/* Admin pages */}
+            <Route path="/admin" element={<Admin />} />
             <Route path="/admin/passenger-list" element={<PassengerList />} />
             <Route path="/admin/financial-reports" element={<FinancialReports />} />
             <Route path="/admin/schedule-edit" element={<ScheduleEdit />} />
