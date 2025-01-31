@@ -1,40 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Input, Button, Table, Pagination, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import logo1 from "../../assets/Picture1.png"; 
+import { format } from 'date-fns'; 
 
 const { Content, Sider } = Layout;
 
 const PassengerList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({ name: '', trainStation: '' });
-  const [selectedPassenger, setSelectedPassenger] = useState(null);
+  const [passengerData, setPassengerData] = useState([]); // Store data from API
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedPassenger, setSelectedPassenger] = useState(null);
 
-  // Dummy data for passengers
-  const data = [
-    { key: '1', passengerId: 'P12345', passengerName: 'John Doe', paymentMethod: 'Credit Card', destination: 'Tokyo', stopNumber: 5, fareAmount: 1200, paymentTime: '2025-01-01 12:30:00', trainStation: 'Shibuya' },
-    { key: '2', passengerId: 'P12346', passengerName: 'Jane Smith', paymentMethod: 'Cash', destination: 'Osaka', stopNumber: 3, fareAmount: 800, paymentTime: '2025-01-02 14:15:00', trainStation: 'Shinjuku' },
-    { key: '3', passengerId: 'P12347', passengerName: 'Michael Brown', paymentMethod: 'Debit Card', destination: 'Kyoto', stopNumber: 2, fareAmount: 1000, paymentTime: '2025-01-03 10:00:00', trainStation: 'Shibuya' },
-    { key: '4', passengerId: 'P12348', passengerName: 'Emily Davis', paymentMethod: 'PayPal', destination: 'Hiroshima', stopNumber: 4, fareAmount: 1100, paymentTime: '2025-01-04 09:45:00', trainStation: 'Shinjuku' },
-    { key: '5', passengerId: 'P12349', passengerName: 'David Wilson', paymentMethod: 'Credit Card', destination: 'Fukuoka', stopNumber: 6, fareAmount: 1300, paymentTime: '2025-01-05 16:20:00', trainStation: 'Shibuya' },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/transactions/all-transactions');
+        const data = await response.json();
+        setPassengerData(data); // Set data from API
+      } catch (error) {
+        console.error('Error fetching passenger data:', error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array, so it runs only on mount
 
   // Columns for the table
   const columns = [
-    { title: 'Passenger Id', dataIndex: 'passengerId', key: 'passengerId' },
-    { title: 'Passenger Name', dataIndex: 'passengerName', key: 'passengerName' },
-    { title: 'Payment Method', dataIndex: 'paymentMethod', key: 'paymentMethod' },
-    { title: 'Destination', dataIndex: 'destination', key: 'destination' },
-    { title: 'Stop Number', dataIndex: 'stopNumber', key: 'stopNumber' },
-    { title: 'Fare Amount', dataIndex: 'fareAmount', key: 'fareAmount' },
-    { title: 'Payment Time', dataIndex: 'paymentTime', key: 'paymentTime' },
+    { title: 'Transaction ID', dataIndex: 'transactionId', key: 'transactionId' },
+    { title: 'Passenger Name', dataIndex: 'userFirstname', key: 'userFirstname' },
+    { title: 'Payment Method', dataIndex: 'modeOfPayment', key: 'modeOfPayment' },
+    { title: 'Destination', dataIndex: 'destinationName', key: 'destinationName' },
+    { title: 'Amount', dataIndex: 'amount', key: 'amount' },
+    { title: 'Transaction Time', dataIndex: 'transactionDateTime', key: 'transactionDateTime',
+      render: (text) => format(new Date(text), 'yyyy-MM-dd HH:mm:ss') // Format date here
+    },
+    { title: 'Train Station ID', dataIndex: 'trainStationId', key: 'trainStationId' },
   ];
 
-  // Filter passengers based on name, station, and destination
-  const filteredData = data.filter(passenger => 
-    (passenger.passengerName.toLowerCase().includes(filters.name.toLowerCase())) &&
-    (passenger.trainStation.toLowerCase().includes(filters.trainStation.toLowerCase()))
+  // Filter passengers based on name (firstname or lastname) and destination (train station)
+  const filteredData = passengerData.filter(passenger => 
+    (passenger.userFirstname.toLowerCase().includes(filters.name.toLowerCase()) || 
+     passenger.userLastname.toLowerCase().includes(filters.name.toLowerCase())) &&
+    (passenger.destinationName.toLowerCase().includes(filters.trainStation.toLowerCase()))
   );
 
   // Handle page change
@@ -93,13 +103,13 @@ const PassengerList = () => {
               <Input
                 value={filters.name}
                 onChange={(e) => setFilters({ ...filters, name: e.target.value })}
-                placeholder="Search by Passenger Name"
+                placeholder="Search by Passenger Name (First or Last)"
                 className="w-64"
               />
               <Input
                 value={filters.trainStation}
                 onChange={(e) => setFilters({ ...filters, trainStation: e.target.value })}
-                placeholder="Filter by Train Station"
+                placeholder="Filter by Destination"
                 className="w-64"
               />
               <Button type="primary" className="bg-purple-700 hover:bg-purple-800">
@@ -113,7 +123,7 @@ const PassengerList = () => {
             columns={columns}
             dataSource={filteredData}
             pagination={false} // Disable built-in pagination
-            rowKey="key"
+            rowKey="transactionId"
             onRow={(record) => ({
               onClick: () => showPassengerDetails(record),
             })}
@@ -140,14 +150,14 @@ const PassengerList = () => {
       >
         {selectedPassenger && (
           <div className="space-y-4">
-            <p><strong>Passenger ID:</strong> {selectedPassenger.passengerId}</p>
-            <p><strong>Name:</strong> {selectedPassenger.passengerName}</p>
-            <p><strong>Payment Method:</strong> {selectedPassenger.paymentMethod}</p>
-            <p><strong>Destination:</strong> {selectedPassenger.destination}</p>
-            <p><strong>Stop Number:</strong> {selectedPassenger.stopNumber}</p>
-            <p><strong>Fare Amount:</strong> ¥{selectedPassenger.fareAmount}</p>
-            <p><strong>Payment Time:</strong> {selectedPassenger.paymentTime}</p>
-            <p><strong>Train Station:</strong> {selectedPassenger.trainStation}</p>
+            <p><strong>Transaction ID:</strong> {selectedPassenger.transactionId}</p>
+            <p><strong>Name:</strong> {selectedPassenger.userFirstname} {selectedPassenger.userLastname}</p>
+            <p><strong>Payment Method:</strong> {selectedPassenger.modeOfPayment}</p>
+            <p><strong>Destination:</strong> {selectedPassenger.destinationName}</p>
+            <p><strong>Amount:</strong> ¥{selectedPassenger.amount}</p>
+            <p><strong>Transaction Time:</strong> {format(new Date(selectedPassenger.transactionDateTime), 'yyyy-MM-dd HH:mm:ss')}</p>
+            <p><strong>Train Station ID:</strong> {selectedPassenger.trainStationId}</p>
+            <p><strong>Card No.:</strong>**** **** **** {selectedPassenger.cardNumber.slice(-4)}</p>
           </div>
         )}
       </Modal>

@@ -1,222 +1,24 @@
-// import React, {useState} from 'react';
-// import '../../Booking.css';
-// import logo from "../../assets/Picture1.png";
-// import logo1 from "../../assets/account-benefits 1.png"
-// import Navbar from '../../Components/Navbar.jsx';
-// import logo2 from "../../assets/add_plus.png";
-// import logo3 from "../../assets/cash_icon.png";
-
-// const Booking = () => {
-
-//   const [isPopupVisible, setIsPopupVisible] = useState(false);
-//   const[isPopupVisible1, setIsPopupVisible1] = useState(false);
-
-//   const handleCashChange = (e) => {
-//     if (e.target.checked) {
-//       setIsPopupVisible(true);
-//     } else {
-//       setIsPopupVisible(false);
-//     }
-//   };
-
-//   const handleCardChange = (e) => {
-//     if (e.target.checked) {
-//       setIsPopupVisible1(true);
-//     } else {
-//       setIsPopupVisible1(false);
-//     }
-//   };
-
-
-//   const closePopup = () => {
-//     setIsPopupVisible(false);
-//   };
-
-//   const closePopup1 = () => {
-//     setIsPopupVisible1(false);
-//   };
-
-  
-
-//   return (
-//     <div>
-
-//     <header className="header">
-//       <div className="logo-container">
-//         <img src={logo} alt="Logo" className="logo" />
-//       </div>
-//       <h1 className="header-title">SoT Railways Ticketing System</h1>
-//       <div className="admin-container">
-//         <p className="admin-text">ADMIN</p>
-//       </div>
-//     </header>
-
-    
-//     <Navbar />
-
-//     <div className="main-container">
-//   <div className="booking-section">
-   
-//     <div className="complete-booking">Complete Your Booking</div>
-
-//   <div className="booking-card">
-//     {/* Date */}
-//     <div className="booking-date">Friday, January 24, 2025</div>
-
-//     {/* Booking Details */}
-//     <div className="booking-content">
-//       {/* Station Details */}
-//       <div className="station-details">
-//         <div className="station">
-//           <div className="station-circle"></div>
-//           <p className="station-name">Tokyo Station</p>
-//         </div>
-//         < div className="station-line"></div>
-     
-//         <div className="travel-time">1h 05 mins</div>
-//         <div className="station">
-//           <div className="station-circle2"></div>
-//           <p className="station-name2">Yokohama Station</p>
-//         </div>
-//       </div>
-
-//       {/* Image */}
-//       <div className="illustration">
-//         <img src={logo1} alt="Traveler Illustration" />
-//       </div>
-//     </div>
-//   </div>
-
-//   <div className="proceed-to-payment">
-//   <button className="payment-button">Proceed to Payment</button>
-// </div>
-
-
-// </div>
-
-// <div className="fare-summary">
-
-//   <div className="complete-booking">Fare Summary</div>
-//   <div className="fare-card">
-//   <div className="fare-item">
-//   <img className="fare-icon" src={logo2} alt="Plus Icon" />
-//     <span className="fare-label">Base Fare</span>
-//     <span className="fare-amount">¥500</span>
-//   </div>
-//   <hr></hr>
-//   <div className="fare-item">
-//   <img className="fare-icon" src={logo2} alt="Plus Icon" />
-//     <span className="fare-label">Taxes</span>
-//     <span className="fare-amount">¥50</span>
-//   </div>
-//   <hr></hr>
-//   <div className="fare-item total">
-//     <span className="fare-label">Total Amount</span>
-//     <span className="fare-amount">¥550</span>
-//   </div>
-
-//   <div>
-//   <div className="payment-method">
-//         <img className="payment-icon" src={logo3} alt="Payment Icon" />
-//         <span className="payment-label">Payment Method</span>
-//       </div>
-
-//       <div className="payment-options">
-//         <div className="payment-option">
-//           <input type="checkbox" id="cash" name="payment-method" value="cash" onChange={handleCashChange} />
-//           <label htmlFor="cash">Cash</label>
-//         </div>
-//         <div className="payment-option">
-//           <input type="checkbox" id="card" name="payment-method" value="card" onChange={handleCardChange} />
-//           <label htmlFor="card">Card</label>
-//         </div>
-//       </div>
-
-//   </div>
-
-
-
-//   </div>
-
- 
- 
-
-
-// </div>
-
-
-
-
-// </div>
-
-// {isPopupVisible1 && (
-//         <div className="popup-overlay">
-//           <div className="popup">
-//             <img className="popup-icon" src={logo} alt="Popup Icon" />
-//             <p>Amount to be paid: ¥ 550</p>
-//             <label>Enter Card Details</label>
-//             <div className="input-container">
-//               {/* <span className="yen-symbol">¥</span> */}
-//               <input type="text" className="amount-input" />
-//             </div>
-//             <button className="popup-submit">Submit</button>
-//             <button className="popup-cancel" onClick={closePopup1}>Cancel</button>
-
-
-//              </div>
-          
-//         </div>
-//       )}
-
-// {isPopupVisible && (
-//         <div className="popup-overlay">
-//           <div className="popup">
-//             <img className="popup-icon" src={logo} alt="Popup Icon" />
-//             <p>Amount to be paid: ¥ 550</p>
-//             <label>Enter Amount</label>
-//             <div className="input-container">
-//               <span className="yen-symbol">¥</span>
-//               <input type="text" className="amount-input" />
-//             </div>
-//             <button className="popup-submit">Submit</button>
-//             <button className="popup-cancel" onClick={closePopup}>Cancel</button>
-
-
-//              </div>
-          
-//         </div>
-//       )}
-
-// </div>
-//   );
-// };
-
-// export default Booking;
-
 import logo from "../../assets/account-benefits 1.png";
 import React, { useState, useEffect } from "react";
 import { Button, Card as Card1, Divider, Modal, Input, Radio, notification } from "antd";
-import {
-  DollarOutlined,
-  CreditCardOutlined,
-  CalendarOutlined,
-  CloseCircleOutlined,
-  CheckOutlined,
-} from "@ant-design/icons";
+import { DollarOutlined, CreditCardOutlined, CalendarOutlined, CloseCircleOutlined, CheckOutlined } from "@ant-design/icons";
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
-import { useLocation } from "react-router-dom";
-import axios from 'axios'; // Optional: if using axios
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from 'axios'; 
 import logo1 from "../../assets/Picture1.png"; 
+import LoadingScreen from "../Loading";
 
 const Booking = () => {
   const { state } = useLocation();
-  const { firstName, lastName, destination, stopNumber, fareAmount, travelTime, source, id } = state;
-  console.log(state);
+  const { firstName, lastName, destination, stopNumber, fareAmount, duration: travelTime, 
+    sourceStation:source, id } = state;
   const navigate = useNavigate();
+  
+
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [arrivalTime, setArrivalTime] = useState(""); 
   const [formData, setFormData] = useState({
@@ -225,12 +27,13 @@ const Booking = () => {
     cvc: "",
     focused: ""
   });
-  
+
   // Base fare calculation
   const baseFare = (fareAmount / 1.1).toFixed(2); 
 
   useEffect(() => {
-    // Set Current Date
+    setTimeout(() => setIsLoading(false), 1000);
+    
     const now = new Date();
     const formattedDate = now.toLocaleDateString("en-US", {
       weekday: "long",
@@ -241,16 +44,14 @@ const Booking = () => {
     setCurrentDate(formattedDate);
 
     const departureTime = new Date();
-    // Add travelTime minutes to the departure time
     departureTime.setMinutes(departureTime.getMinutes() + parseInt(travelTime));
-
+    
     const arrivalTimeString = departureTime.toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
     });
     setArrivalTime(arrivalTimeString);
   }, [travelTime]);
-
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
   };
@@ -258,6 +59,11 @@ const Booking = () => {
   const handleProceedToPayment = () => {
     if (paymentMethod) {
       setIsPopupVisible(true);
+    } else {
+      notification.error({
+        message: "Payment Method Missing",
+        description: "Please select a payment method before proceeding.",
+      });
     }
   };
 
@@ -280,75 +86,106 @@ const Booking = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
+    // Check for required fields
+    if (!formData.cardNumber || !formData.expiry || !formData.cvc) {
+      notification.error({
+        message: "Missing Card Information",
+        description: "Please complete all card details before proceeding.",
+      });
+      return;
+    }
+  
     // Data to send in the POST request
     const requestData = {
       modeOfPayment: "Card",
       userFirstname: firstName,
       userLastname: lastName,
       destinationName: destination,
-      trainStationId: stopNumber,
+      trainStationId: id,
       amount: fareAmount,
       travelTime,
       source,
-      train_id: id,
-
       cardNumber: parseInt(formData.cardNumber),
-      
     };
-
+  
     try {
-     
-      // const response = await axios.post("http://localhost:8080/api/transactions/add-transaction", requestData);
+      // Set loading to true before sending request
+      setIsLoading(true);
+  
+      const response = await axios.post(
+        "http://localhost:8080/api/transactions/add-transaction",
+        requestData
+      );
+  
+      // Log the requestData to console
       console.log(requestData);
-      // Handle success response
-      // console.log("Payment successful:", response.data);
-
-      notification.success({
-        message: "Payment Success",
-        description: "Your payment was successful!",
-      })
-      navigate("/ticket", {
-        state: { requestData },
-      });
-    
-      
-      // Reset form data and close popup after submission
+  
+      // Check if the response status is 200 OK
+      if (response.status === 200) {
+        console.log("Payment successful:", response.data);
+  
+        notification.success({
+          message: "Payment Success",
+          description: "Your payment was successful!",
+        });
+  
+        navigate("/ticket", {
+          state: { requestData },
+        });
+      } else {
+        notification.error({
+          message: "Payment Failed",
+          description: `Unexpected response: ${response.statusText}`,
+        });
+      }
+    } catch (error) {
+      console.error("Payment failed:", error);
+  
+      if (error.response) {
+        notification.error({
+          message: "Payment Failed",
+          description: error.response.data || "An error occurred during the payment process.",
+        });
+      } else if (error.request) {
+        notification.error({
+          message: "Payment Failed",
+          description: "No response received from the server. Please try again later.",
+        });
+      } else {
+        notification.error({
+          message: "Payment Failed",
+          description: `Error: ${error.message}`,
+        });
+      }
+    } finally {
+      // Set loading to false after request completes
+      setIsLoading(false);
+  
+      // Reset form data and close popup
       setFormData({
-        ...formData,
         cardNumber: "",
         expiry: "",
         cvc: "",
         focused: "",
       });
-      setIsPopupVisible(false); 
-
-    } catch (error) {
-      // Handle error
-      console.error("Error making payment:", error);
-      notification.error({
-        message: "Payment Failed",
-        description: "There was an issue with your payment. Please try again.",
-      });
+      setIsPopupVisible(false);
     }
   };
+  
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="min-h-screen bg-[#E2CFEA]">
-      {/* Header Section */}
-      {/* <header className="bg-[#062726] p-4 flex justify-between items-center">
-        <div className="text-[#E2CFEA] text-xl font-bold">SoT Railways Ticketing System</div>
-        <div className="text-[#E2CFEA] font-semibold">ADMIN</div>
-      </header> */}
-          <nav className="fixed top-0 w-full bg-purple-900 text-white flex justify-between items-center px-8 py-4 shadow-md">
-                    <div className="flex items-center space-x-3">
-                      <img src={logo1} alt="Logo" className="h-8" />
-                      <span className="text-xl font-bold">SoT Railway Ticketing System</span>
-                    </div>
-                    <button className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-sm font-medium">
-                      ADMIN
-                    </button>
-                  </nav>
+      <nav className="fixed top-0 w-full bg-purple-900 text-white flex justify-between items-center px-8 py-4 shadow-md">
+        <div className="flex items-center space-x-3">
+          <img src={logo1} alt="Logo" className="h-8" />
+          <span className="text-xl font-bold">SoT Railway Ticketing System</span>
+        </div>
+        <button className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-sm font-medium">ADMIN</button>
+      </nav>
 
       {/* Main Content */}
       <h2 className="text-3xl font-semibold text-[#6247AA] mb-4 text-center mt-16">Complete Your Booking</h2>
@@ -368,8 +205,7 @@ const Booking = () => {
                   <p className="text-[#102B3F]">{new Date().toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit',
-                  })}
-                  </p>
+                  })}</p>
                 </div>
                 <div className="h-8 border-l-2 border-dashed border-[#102B3F] ml-2"></div>
                 <div className="flex items-center gap-2">
@@ -532,7 +368,6 @@ const Booking = () => {
 };
 
 export default Booking;
-
 
 
 // import logo from "../../assets/account-benefits 1.png";

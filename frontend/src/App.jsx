@@ -18,7 +18,7 @@ import Ticket from "./Pages/User/Ticket";
 import Admin from "./Pages/Admin/AdminHome";
 import PassengerList from "./Pages/Admin/PassengerList";
 import FinancialReports from "./Pages/Admin/FinancialReports";
-import ScheduleEdit from "./Pages/Admin/ScheduleEdit";
+// import ScheduleEdit from "./Pages/Admin/ScheduleEdit";
 import TicketEdit from "./Pages/Admin/TicketEdit";
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/passenger-list" element={<PassengerList />} />
             <Route path="/admin/financial-reports" element={<FinancialReports />} />
-            <Route path="/admin/schedule-edit" element={<ScheduleEdit />} />
+            {/* <Route path="/admin/schedule-edit" element={<ScheduleEdit />} /> */}
             <Route path="/admin/ticket-edit" element={<TicketEdit />} />
 
             {/* Catch-all route for non-existent pages */}

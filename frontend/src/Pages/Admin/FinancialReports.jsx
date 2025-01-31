@@ -1,76 +1,78 @@
-import React, { useState } from 'react';
-import { Layout, Input, Button, Table, Pagination } from 'antd';
-import logo1 from "../../assets/Picture1.png"; 
+import React, { useState, useEffect } from 'react';
+import { Layout, Input, Button, Table, Pagination, message, Modal, DatePicker } from 'antd';
+import { format } from 'date-fns';
+import dayjs from 'dayjs';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import logo1 from "../../assets/Picture1.png";
 
 const { Content, Sider } = Layout;
 
 const FinancialReports = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({ stationName: '' });
+  const [financialData, setFinancialData] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedTrain, setSelectedTrain] = useState(null);
+  const [transactions, setTransactions] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(dayjs()); 
 
-  // Dummy data for financial reports
-  const data = [
-    {
-      key: '1',
-      stationName: 'Shibuya',
-      earnings: 1200000, // Earnings in yen
-      totalPassengers: 1500,
-    },
-    {
-      key: '2',
-      stationName: 'Shinjuku',
-      earnings: 1000000,
-      totalPassengers: 1300,
-    },
-    {
-      key: '3',
-      stationName: 'Osaka',
-      earnings: 950000,
-      totalPassengers: 1200,
-    },
-    {
-      key: '4',
-      stationName: 'Kyoto',
-      earnings: 850000,
-      totalPassengers: 1000,
-    },
-    {
-      key: '5',
-      stationName: 'Hiroshima',
-      earnings: 700000,
-      totalPassengers: 800,
-    },
-  ];
+  const pageSize = 5;
 
-  // Columns for the financial report table
-  const columns = [
-    {
-      title: 'Station Name',
-      dataIndex: 'stationName',
-      key: 'stationName',
-    },
-    {
-      title: 'Earnings in Yen (¥)',
-      dataIndex: 'earnings',
-      key: 'earnings',
-    },
-    {
-      title: 'Total Passengers',
-      dataIndex: 'totalPassengers',
-      key: 'totalPassengers',
-    },
-  ];
-
-  // Filter reports based on filter state (search by stationName)
-  const filteredData = data.filter((report) =>
-    report.stationName.toLowerCase().includes(filters.stationName.toLowerCase())
-  );
-
-  // Handle page change
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  // Fetch financial data
+  const fetchFinancialData = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/revenue/calculate-and-save");
+      setFinancialData(response.data);
+    } catch (error) {
+      console.error('Error fetching financial data:', error);
+      message.error('Error fetching financial data.');
+    }
   };
+
+  // Fetch transactions data for a train
+  const fetchTransactionData = async () => {
+    if (!selectedTrain) return;
+
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/revenue/station/${selectedTrain}/transactions?date=${selectedDate.format('YYYY-MM-DD')}`
+      );
+      setTransactions(response.data.length > 0 ? response.data : []);
+    } catch (error) {
+      console.error('Error fetching transaction data:', error);
+      message.error('Error fetching transaction data.');
+    }
+  };
+
+  // Filter and paginate data
+  const filteredData = financialData.filter((report) =>
+    report.stationName?.toLowerCase().includes(filters.stationName.toLowerCase())
+  );
+  const paginatedData = filteredData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+  // Handle modal visibility and fetch transactions when a train is selected
+  const showModal = (trainId) => {
+    setSelectedTrain(trainId);
+    setIsModalVisible(true);
+  };
+
+  // Handle modal close
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setTransactions([]); 
+    setSelectedTrain(null);
+  };
+
+  // Fetch transactions when selectedTrain or selectedDate changes
+  useEffect(() => {
+    if (isModalVisible && selectedTrain) fetchTransactionData();
+  }, [selectedTrain, selectedDate]);
+
+  // Fetch financial data on component mount
+  useEffect(() => {
+    fetchFinancialData();
+  }, []);
 
   return (
     <Layout style={{ minHeight: '100vh' }} className="bg-gray-100">
@@ -115,7 +117,7 @@ const FinancialReports = () => {
                 placeholder="Search by Station Name"
                 className="w-64"
               />
-              <Button type="primary" className="bg-purple-700 hover:bg-purple-800">
+              <Button type="primary" className="bg-purple-700 hover:bg-purple-800" onClick={fetchFinancialData}>
                 Apply Filter
               </Button>
             </div>
@@ -123,10 +125,18 @@ const FinancialReports = () => {
 
           {/* Table Section */}
           <Table
-            columns={columns}
-            dataSource={filteredData}
-            pagination={false} // Disable built-in pagination
-            rowKey="key"
+            columns={[
+              { title: 'Train ID', dataIndex: 'trainId', key: 'trainId' },
+              { title: 'Station Name', dataIndex: 'stationName', key: 'stationName' },
+              { title: 'Earnings (¥)', dataIndex: 'earnings', key: 'earnings' },
+              { title: 'Total Passengers', dataIndex: 'totalPassengers', key: 'totalPassengers' },
+            ]}
+            dataSource={paginatedData}
+            pagination={false}
+            rowKey="trainId"
+            onRow={(record) => ({
+              onClick: () => showModal(record.trainId),
+            })}
           />
 
           {/* Pagination */}
@@ -134,12 +144,47 @@ const FinancialReports = () => {
             <Pagination
               current={currentPage}
               total={filteredData.length}
-              pageSize={5} // Show 5 reports per page
-              onChange={handlePageChange}
+              pageSize={pageSize}
+              onChange={setCurrentPage}
             />
           </div>
         </Content>
       </Layout>
+
+      {/* Transactions Modal */}
+      <Modal
+        title={`Transactions for Train ID ${selectedTrain}`}
+        open={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        width={800}
+      >
+        {/* DatePicker */}
+        <div className="mb-4">
+          <DatePicker
+            value={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            format="YYYY-MM-DD"
+            className="w-full"
+          />
+        </div>
+
+        {/* Transaction Table */}
+        <Table
+          columns={[
+            { title: 'Transaction ID', dataIndex: 'transactionId', key: 'transactionId' },
+            { title: 'Passenger Name', dataIndex: 'userFirstname', key: 'userFirstname', render: (text, record) => `${text} ${record.userLastname}` },
+            { title: 'Payment Method', dataIndex: 'modeOfPayment', key: 'modeOfPayment' },
+            { title: 'Destination', dataIndex: 'destinationName', key: 'destinationName' },
+            { title: 'Amount (¥)', dataIndex: 'amount', key: 'amount' },
+            { title: 'Transaction Time', dataIndex: 'transactionDateTime', key: 'transactionDateTime', render: (text) => format(new Date(text), 'yyyy-MM-dd HH:mm:ss') },
+            { title: 'Train Station ID', dataIndex: 'trainStationId', key: 'trainStationId' },
+          ]}
+          dataSource={transactions}
+          rowKey="transactionId"
+          pagination={false}
+        />
+      </Modal>
     </Layout>
   );
 };
