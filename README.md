@@ -4,22 +4,27 @@
 
 ### If you have already cloned the repository:
 
-1. **Checkout the working code:**
+1. **Pull the latest changes:**
+  ```bash
+  git pull
+  ```
+
+2. **Checkout the working code:**
   ```bash
   git checkout working-code
   ```
 
-2. **Navigate to the frontend directory:**
+3. **Navigate to the frontend directory:**
   ```bash
   cd frontend
   ```
 
-3. **Install the dependencies (including legacy peer dependencies):**
+4. **Install the dependencies (including legacy peer dependencies):**
   ```bash
   npm install --legacy-peer-deps
   ```
 
-4. **Start the frontend development server:**
+5. **Start the frontend development server:**
   ```bash
   npm run dev
   ```
@@ -67,7 +72,12 @@
 
 ### If you’ve already cloned the backend repository:
 
-1. **Checkout the working code:**
+1. **Pull the latest changes:**
+  ```bash
+  git pull
+  ```
+
+2. **Checkout the working code:**
   ```bash
   git checkout working-code
   ```
