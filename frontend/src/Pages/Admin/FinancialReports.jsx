@@ -4,8 +4,8 @@ import { format } from 'date-fns';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import logo1 from "../../assets/Picture1.png";
-
+import { FaFileUpload, FaUsers, FaFileInvoice, FaUser } from "react-icons/fa";
+import  PassengerCharts from '../../Components/PassengerCharts';
 const { Content, Sider } = Layout;
 
 const FinancialReports = () => {
@@ -16,14 +16,25 @@ const FinancialReports = () => {
   const [selectedTrain, setSelectedTrain] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs()); 
+  const [totalEarnings, setTotalEarnings] = useState(0);
 
-  const pageSize = 5;
+  const pageSize = 10;
+ 
+
 
   // Fetch financial data
   const fetchFinancialData = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/revenue/calculate-and-save");
-      setFinancialData(response.data);
+
+      // Sort the data by earnings in descending order (highest earnings first)
+      const sortedData = response.data.sort((a, b) => b.earnings - a.earnings);
+      const total = sortedData.reduce((sum, station) => sum + station.earnings, 0);
+      setTotalEarnings(total);
+      
+      // Now set the sorted data to state
+      setFinancialData(sortedData);
+      
     } catch (error) {
       console.error('Error fetching financial data:', error);
       message.error('Error fetching financial data.');
@@ -75,38 +86,45 @@ const FinancialReports = () => {
   }, []);
 
   return (
-    <Layout style={{ minHeight: '100vh' }} className="bg-gray-100">
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full bg-purple-900 text-white flex justify-between items-center px-8 py-4 shadow-md">
-        <div className="flex items-center space-x-3">
-          <img src={logo1} alt="Logo" className="h-8" />
-          <span className="text-xl font-semibold">SoT Railway Ticketing System</span>
-        </div>
-        <button className="hover:bg-purple-300 rounded-lg px-4 py-2 text-sm font-medium">
-          Logout
-        </button>
-      </nav>
-
-      {/* Sidebar */}
-      <Sider width={250} className="bg-purple-900 text-white mt-20">
-        <nav>
-          <ul>
-            <li className="mb-4">
-              <Link to="/admin" className="text-lg text-white hover:text-purple-300 transition-colors">Home</Link>
-            </li>
-            <li className="mb-4">
-              <Link to="/admin/passenger-list" className="text-lg text-white hover:text-purple-300 transition-colors">Passenger Data</Link>
-            </li>
-            <li className="mb-4">
-              <Link to="/admin/financial-reports" className="text-lg text-white hover:text-purple-300 transition-colors">Financial Report</Link>
-            </li>
-          </ul>
-        </nav>
-      </Sider>
+   <Layout className="min-h-screen flex mt-16">
+         {/* Sidebar */}
+         <Sider
+         width={250}
+         className={`bg-purple-900 text-white fixed h-full z-20 transition-all duration-300`}
+       
+       >
+         <div className="p-6 text-center font-bold text-xl border-b border-gray-600 bg-purple-950">
+           Admin Panel
+         </div>
+         <nav className="p-6">
+           <ul className="space-y-6">
+             <li className="flex items-center space-x-4">
+               <Link to="/admin" className="block text-lg hover:text-purple-300 flex">
+                 <FaUser  className='mt-1' />
+               <span className="text-lg ml-1">Home</span>
+               </Link>
+             </li>
+             <li className="flex items-center space-x-4">
+               <Link to="/admin/passenger-list" className="block text-lg hover:text-purple-300 flex">
+                 <FaUsers className='mt-1' />
+                 <span className="text-lg ml-1">Passenger Data</span>
+               </Link>
+             </li>
+             <li className="flex items-center space-x-4">
+               <Link to="/admin/financial-reports" className="block text-lg hover:text-purple-300 flex">
+                 <FaFileInvoice className='mt-1' />
+                 <span className="text-lg ml-1">Financial Report</span>
+               </Link>
+             </li>
+           </ul>
+         </nav>
+       </Sider>
 
       {/* Main Content */}
-      <Layout className="site-layout">
-        <Content className="pt-24 px-8">
+      <Layout className="ml-[250px] w-full p-6">
+        <PassengerCharts />
+        <Content className="pt-4 px-8">
+      
           {/* Filter Section */}
           <div className="mb-8 flex items-center justify-between">
             <h2 className="text-3xl font-semibold text-gray-800">Financial Reports</h2>
@@ -134,9 +152,11 @@ const FinancialReports = () => {
             dataSource={paginatedData}
             pagination={false}
             rowKey="trainId"
+            className=''
             onRow={(record) => ({
               onClick: () => showModal(record.trainId),
             })}
+            rowClassName="cursor-pointer hover:bg-purple-200"
           />
 
           {/* Pagination */}

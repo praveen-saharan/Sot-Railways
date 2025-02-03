@@ -9,24 +9,22 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import LoadingScreen from "./Pages/Loading";
 
-import TrainSchedule from "./Pages/User/TrainSchedule";
+
 import Booking from "./Pages/User/Booking";
-import BookingSummary from "./Pages/User/BookingSummary";
-import Payment from "./Pages/User/Payment";
+
 import Ticket from "./Pages/User/Ticket";
 
 import Admin from "./Pages/Admin/AdminHome";
 import PassengerList from "./Pages/Admin/PassengerList";
 import FinancialReports from "./Pages/Admin/FinancialReports";
-// import ScheduleEdit from "./Pages/Admin/ScheduleEdit";
-import TicketEdit from "./Pages/Admin/TicketEdit";
+import ProtectedRoute from './Components/Protected';
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
 
-        {/* <Navbar /> */}
+        <Navbar />
 
       
 
@@ -38,25 +36,27 @@ function App() {
             <Route path="/contact" element={<Contact />} />
 
             {/* User pages */}
-            <Route path="/train-schedule" element={<TrainSchedule />} />
             <Route path="/booking" element={<Booking />} />
-            <Route path="/booking-summary" element={<BookingSummary />} />
-            <Route path="/payment" element={<LoadingScreen />} />
             <Route path="/ticket" element={<Ticket />} />
 
-            {/* Admin pages */}
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/passenger-list" element={<PassengerList />} />
-            <Route path="/admin/financial-reports" element={<FinancialReports />} />
-            {/* <Route path="/admin/schedule-edit" element={<ScheduleEdit />} /> */}
-            <Route path="/admin/ticket-edit" element={<TicketEdit />} />
-
+            <Route
+              path="/admin"
+              element={<ProtectedRoute element={<Admin />} />}
+            />
+            <Route
+              path="/admin/passenger-list"
+              element={<ProtectedRoute element={<PassengerList />} />}
+            />
+            <Route
+              path="/admin/financial-reports"
+              element={<ProtectedRoute element={<FinancialReports />} />}
+            />
             {/* Catch-all route for non-existent pages */}
             <Route path="*" element={<NotExist />} />
           </Routes>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   );

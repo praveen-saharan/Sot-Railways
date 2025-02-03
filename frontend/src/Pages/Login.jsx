@@ -42,17 +42,49 @@ const Login = () => {
     });
   }, []);
 
-  const handleLogin = (e) => {
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   setError("");
+
+  //   if (email === "admin@sot-rts.com" && password === "admin123") {
+  //     message.success("Login successful! Redirecting...");
+  //     localStorage.setItem('isLoggedIn', 'true');
+  //     setTimeout(() => navigate("/admin"), 1000);
+  //   } else {
+  //     setError("Invalid email or password.");
+  //   }
+  // };
+  
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-
-    if (email === "admin@sot-rts.com" && password === "admin123") {
-      message.success("Login successful! Redirecting...");
-      setTimeout(() => navigate("/admin"), 1000);
-    } else {
-      setError("Invalid email or password.");
+  
+    try {
+      const response = await fetch(
+        `http://localhost:8080/admin/login?username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  console.log(response);
+      if (response.ok) {
+        const data = await response.text(); // Get response message
+        message.success(data || "Login successful! Redirecting...");
+        localStorage.setItem("isLoggedIn", "true");
+        setTimeout(() => navigate("/admin"), 1000);
+      } else {
+        const errorMessage = await response.text();
+        setError(errorMessage || "Invalid email or password.");
+      }
+    } catch (error) {
+      setError("Server error. Please try again later.");
+      console.error("Login request failed:", error);
     }
   };
+  
 
   return (
     <div

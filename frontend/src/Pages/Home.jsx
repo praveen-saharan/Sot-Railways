@@ -69,21 +69,13 @@ const Home = () => {
       className="min-h-screen flex flex-col bg-cover bg-center"
       style={{ backgroundImage: `url(${trainBg})` }}
     >
-      <nav className="fixed top-0 w-full bg-purple-900 text-white flex justify-between items-center px-8 py-4 shadow-md">
-        <div className="flex items-center space-x-3">
-          <img src={logo} alt="Logo" className="h-8" />
-          <span className="text-xl font-bold">SoT Railway Ticketing System</span>
-        </div>
-        <Link to="/login" className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-sm font-medium">
-          ADMIN
-        </Link>
-      </nav>
+   
 
       {isLoading ? (
         <LoadingScreen /> // Show the loading screen while fetching data
       ) : (
         <main className="flex-grow flex flex-col items-center justify-center mt-20">
-          <h1 className="text-white text-5xl font-bold leading-tight text-center shadow-lg mb-12">
+          <h1 className="text-white text-5xl font-bold leading-tight text-center mb-12">
             Book Your Tickets Now!
           </h1>
 

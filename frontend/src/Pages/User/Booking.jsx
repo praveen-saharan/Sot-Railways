@@ -6,7 +6,6 @@ import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios'; 
-import logo1 from "../../assets/Picture1.png"; 
 import LoadingScreen from "../Loading";
 
 const Booking = () => {
@@ -95,6 +94,17 @@ const Booking = () => {
       });
       return;
     }
+    
+    // Check if the card number length is between 12 and 19 digits
+    const cardNumberLength = formData.cardNumber.replace(/\D/g, '').length; // Removes any non-digit characters
+    if (cardNumberLength < 12 || cardNumberLength > 19) {
+      notification.error({
+        message: "Invalid Card Number Length",
+        description: "Card number must be between 12 and 19 digits.",
+      });
+      return;
+    }
+    
   
     // Data to send in the POST request
     const requestData = {
@@ -179,18 +189,8 @@ const Booking = () => {
 
   return (
     <div className="min-h-screen bg-[#E2CFEA]">
-      <nav className="fixed top-0 w-full bg-purple-900 text-white flex justify-between items-center px-8 py-4 shadow-md">
-        <div className="flex items-center space-x-3">
-          <img src={logo1} alt="Logo" className="h-8" />
-          <span className="text-xl font-bold">SoT Railway Ticketing System</span>
-        </div>
-        <button className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-sm font-medium">ADMIN</button>
-      </nav>
-
-      {/* Main Content */}
-      <h2 className="text-3xl font-semibold text-[#6247AA] mb-4 text-center mt-16">Complete Your Booking</h2>
+      <h2 className="text-3xl font-semibold text-[#6247AA] mb-4 text-center mt-16 pt-10">Complete Your Booking</h2>
       <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 min-w-full">
-        {/* Booking Section */}
         <div className="flex flex-col gap-6 w-full md:col-span-2 h-full">
           <Card1 className="shadow-lg h-full">
             <Divider />
@@ -224,8 +224,6 @@ const Booking = () => {
             </div>
           </Card1>
         </div>
-
-        {/* Fare Summary */}
         <div className="flex flex-col gap-6 w-full h-full">
           <Card1 className="shadow-lg h-full">
             <h2 className="text-lg font-semibold text-[#6247AA]">Fare Summary</h2>
@@ -253,7 +251,6 @@ const Booking = () => {
         </div>
       </div>
 
-      {/* Payment Method Section */}
       <div className="flex justify-center w-full">
         <div className="flex flex-col gap-4 w-full md:w-1/3 p-6">
           <Radio.Group
@@ -276,93 +273,89 @@ const Booking = () => {
         </div>
       </div>
 
-      {/* Payment Modal */}
       <Modal
-        visible={isPopupVisible}
-        title="Card Payment"
-        onCancel={closePopup}
-        footer={null}
-        className="payment-modal"
-      >
-        <p>Amount to be paid: ¥{fareAmount}</p>
+  visible={isPopupVisible}
+  title="Card Payment"
+  onCancel={closePopup}
+  footer={null}
+  className="payment-modal"
+>
+  <p className="text-sm text-gray-600">Amount to be paid: ¥{fareAmount}</p>
 
-        {/* Credit Card Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col justify-start items-start w-full space-y-9">
-          <div className="flex flex-col justify-center items-center w-full">
-            <div className="p-8 bg-gray-100 flex flex-col w-full xl:w-4/5 rounded-lg shadow-md">
-              {/* Credit Card Preview */}
-              <div className="mt-4 flex justify-center">
-                <Card
-                  number={formData.cardNumber}
-                  name={firstName + " " + lastName}
-                  expiry={formData.expiry}
-                  cvc={formData.cvc}
-                  focused={formData.focused}
-                />
-              </div>
+  {/* Credit Card Form */}
+  <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="flex flex-col justify-center items-center space-y-4 w-[5/6]">
+      {/* Credit Card Preview */}
+      <div className="flex justify-center w-full">
+        <Card
+          number={formData.cardNumber}
+          name={firstName.toUpperCase() + " " + lastName.toUpperCase()}
+          expiry={formData.expiry}
+          cvc={formData.cvc}
+          focused={formData.focused}
+        />
+      </div>
 
-              {/* Card Number Input */}
-              <div className="mt-6">
-                <Input
-                  className="border rounded-xl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="number"
-                  name="cardNumber"
-                  placeholder="0000 1234 6549 15151"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+      {/* Card Number Input */}
+      <div className="flex flex-col sm:flex-row sm:space-x-4 w-full">
+        <Input
+          className="border rounded-xl border-gray-300 p-3 w-full text-base placeholder-gray-500"
+          type="number"
+          name="cardNumber"
+          placeholder="Card Number"
+          value={formData.cardNumber}
+          onChange={handleInputChange}
+          required
+        />
+   
+        <Input
+          className="border rounded-xl border-gray-300 p-3 w-full text-base placeholder-gray-500"
+          type="text"
+          name="fullName"
+          placeholder="Full Name"
+          value={firstName.toUpperCase() + " " + lastName.toUpperCase()}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
 
-              {/* Full Name Input */}
-              <div className="mt-4">
-                <Input
-                  className="border rounded-xl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="text"
-                  name="fullName"
-                  placeholder="Full Name"
-                  value={firstName + " " + lastName}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+      {/* Expiry & CVC Inputs */}
+      <div className="flex flex-col sm:flex-row sm:space-x-4 w-full">
+        <Input
+          className="border rounded-xl border-gray-300 p-3 w-full text-base placeholder-gray-500"
+          type="text"
+          name="expiry"
+          placeholder="MM/YY"
+          value={formData.expiry}
+          onChange={handleInputChange}
+          required
+        />
+        <Input
+          className="border rounded-xl border-gray-300 p-3 w-full text-base placeholder-gray-500"
+          type="text"
+          name="cvc"
+          placeholder="CVV"
+          value={formData.cvc}
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+          required
+        />
+      </div>
 
-              {/* Expiry & CVC Inputs */}
-              <div className="mt-4 flex space-x-4">
-                <Input
-                  className="border rounded-xl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="text"
-                  name="expiry"
-                  placeholder="MM/YY"
-                  value={formData.expiry}
-                  onChange={handleInputChange}
-                  required
-                />
-                <Input
-                  className="border rounded-xl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="text"
-                  name="cvc"
-                  placeholder="CVC"
-                  value={formData.cvc}
-                  onChange={handleInputChange}
-                  onFocus={handleInputFocus}
-                  required
-                />
-              </div>
+      {/* Submit Button */}
+      <div className="flex flex-col sm:flex-row justify-between gap-2 mt-6 w-full">
+        <Button onClick={closePopup} icon={<CloseCircleOutlined />} className="border-none text-gray-700 hover:bg-gray-200 w-full sm:w-auto">
+          Cancel
+        </Button>
+        <Button type="primary" icon={<CheckOutlined />} htmlType="submit" className="bg-[#062726] w-full sm:w-auto">
+          Submit
+        </Button>
+      </div>
+    </div>
+  </form>
+</Modal>
 
-              {/* Submit Button */}
-              <div className="flex justify-end gap-2 mt-8">
-                <Button onClick={closePopup} icon={<CloseCircleOutlined />} className="border-none">
-                  Cancel
-                </Button>
-                <Button type="primary" icon={<CheckOutlined />} htmlType="submit" className="bg-[#062726]">
-                  Submit
-                </Button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </Modal>
+
     </div>
   );
 };

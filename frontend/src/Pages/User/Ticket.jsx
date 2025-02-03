@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';  // Framer Motion
 import tick from "../../assets/tick.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo1 from "../../assets/Picture1.png"; 
+import QRCode from '../../assets/QR.png';
 
 const { Title, Text } = Typography;
 
@@ -27,13 +28,13 @@ const Ticket = () => {
   const [departureTimeString, setDepartureTimeString] = useState('');
 
 
-    useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/');
-    }, 10000);
+  //   useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate('/');
+  //   }, 10000);
 
-    return () => clearTimeout(timer); // Cleanup timer
-  }, [navigate]);
+  //   return () => clearTimeout(timer); // Cleanup timer
+  // }, [navigate]);
 
   useEffect(() => {
     const departureTime = new Date();
@@ -54,53 +55,94 @@ const Ticket = () => {
   }, [travelTime]);
 
   const downloadPDF = () => {
-    const doc = new jsPDF();
-  
-    doc.setLineWidth(1);
-    doc.rect(10, 10, 190, 270); // (x, y, width, height)
-  
-    doc.setFontSize(22);
-    doc.setTextColor(0, 102, 204);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Booking Confirmation', 105, 30, { align: 'center' });
-  
-    doc.addImage(tick, 'PNG', 85, 40, 40, 40);
-  
-    doc.setFontSize(14);
-    doc.setTextColor(40, 40, 40);
-    doc.setFont('helvetica', 'normal');
-    doc.text(` Booked On: ${new Date().toLocaleString()}`, 20, 250);
+
+          var doc = new jsPDF();
+          doc.setFillColor(226, 207, 234); 
+          doc.rect(0, 0, 210, 297, "F");
+          doc.setFillColor(88, 28, 135);
+          doc.rect(0, 0, 210, 40, "F");
+          doc.setFontSize(22);
+          doc.setTextColor(255, 255, 255);
+          doc.setFont("helvetica", "bold");
+          doc.text("Booking Confirmation", 105, 25, { align: "center" });
+
+          doc.addImage(logo1, "PNG", 10, 7.5, 25, 25);
+          doc.setFontSize(14);
+          doc.setTextColor(40, 40, 40);
+          doc.setFont("helvetica", "normal");
+          doc.text("Passenger Name:", 20, 55);
+          doc.setFont("helvetica", "bold");
+          doc.text(`${userFirstname.toUpperCase()} ${userLastname.toUpperCase()}`, 80, 55);
+          
+          doc.setFont("helvetica", "normal");
+          doc.text("Booked On:", 20, 65);
+          doc.setFont("helvetica", "bold");
+          doc.text(`Booked On: ${new Date().toLocaleString()}`, 80, 65);
+          doc.setFont("helvetica", "normal");
+          doc.text("From:", 20, 80);
+          doc.setFont("helvetica", "bold");
+          doc.text(`${source || "Tokyo"}`, 80, 80);
+          
+          doc.setFont("helvetica", "normal");
+          doc.text("To:", 20, 90);
+          doc.setFont("helvetica", "bold");
+          doc.text(`${destinationName}`, 80, 90);
+          
+          doc.setFont("helvetica", "normal");
+          doc.text("Departure:", 20, 100);
+          doc.setFont("helvetica", "bold");
+          doc.text(`${departureTimeString}`, 80, 100);
+          
+          doc.setFont("helvetica", "normal");
+          doc.text("Arrival:", 20, 110);
+          doc.setFont("helvetica", "bold");
+          doc.text(`${arrivalTimeString}`, 80, 110);
+          
+          doc.setDrawColor(200, 200, 200);
+          doc.line(20, 120, 190, 120);
+          
+          doc.setFontSize(16);
+          doc.setTextColor(0, 102, 204);
+          doc.setFont("helvetica", "bold");
+          doc.text("Payment Summary", 20, 135);
+          
+          doc.setFontSize(14);
+          doc.setTextColor(40, 40, 40);
+          doc.setFont("helvetica", "normal");
+          
+          doc.text("Fare:", 20, 150);
+          doc.setFont("helvetica", "bold");
+          doc.text(`${amount.toFixed(2)}`, 190, 150, { align: "right" });
+          
+          doc.setFont("helvetica", "normal");
+          doc.text("Mode of Payment:", 20, 160);
+          doc.setFont("helvetica", "bold");
+          doc.text(`${modeOfPayment}`, 190, 160, { align: "right" });
+          
+          doc.setFont("helvetica", "normal");
+          doc.text("Card Number:", 20, 170);
+          doc.setFont("helvetica", "bold");
+          doc.text(`**** **** **** ${cardNumber.toString().slice(-4)}`, 190, 170, { align: "right" });
+            doc.addImage(QRCode, "PNG", 85, 190, 40, 40);
+            doc.setFontSize(16);
+            doc.setTextColor(0, 153, 76);
+            doc.setFont("helvetica", "bold");
+            doc.text("Thank you for choosing SoT Railways!", 105, 240, { align: "center" });
     
-    doc.text(` Name: ${userFirstname} ${userLastname}`, 20, 90);
-    doc.text(` From: ${source || "Tokyo"}`, 20, 110);
-    doc.text(` Destination: ${destinationName}`, 20, 130);
-    doc.text(` Departure Time: ${departureTimeString}`, 20, 150);
-    doc.text(` Arrival Time: ${arrivalTimeString}`, 20, 170);
+            doc.setFontSize(12);
+            doc.setTextColor(100, 100, 100);
+            doc.setFont("helvetica", "italic");
+            doc.text("Safe travels and happy journey!", 105, 250, { align: "center" });
     
-    doc.setFont('helvetica', 'bold');
-    doc.text(' Payment Details:', 20, 190);
-    doc.setFont('helvetica', 'normal');
-    doc.text(` Fare: ¥‎${amount.toFixed(2)}`, 20, 205);
-    doc.text(` Mode: ${modeOfPayment}`, 20, 220);
-    doc.text(` Card: **** **** **** ${cardNumber.toString().slice(-4)}`, 20, 235);
-  
-    doc.setFontSize(16);
-    doc.setTextColor(0, 153, 76);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Thanks for choosing SoT Railways! Happy Journey!', 105, 270, { align: 'center' });
-  
-    doc.save('ticket.pdf');
+            doc.save("booking_invoice.pdf");
+    
+    
+    
   };
 
   return (
-    <div className="min-h-screen bg-[#E2CFEA]">
-      <nav className="fixed top-0 w-full bg-purple-900 text-white flex justify-between items-center px-8 py-4 shadow-md">
-        <div className="flex items-center space-x-3">
-          <img src={logo1} alt="Logo" className="h-8" />
-          <span className="text-xl font-bold">SoT Railway Ticketing System</span>
-        </div>
-        <button className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-sm font-medium">ADMIN</button>
-      </nav>
+    <div className="min-h-screen bg-[#E2CFEA] py-10">
+     
 
       <motion.div 
         className="max-w-2xl mx-auto mt-16 py-3 rounded-lg shadow-xl bg-gradient-to-r from-blue-100 via-white to-blue-100"
@@ -163,13 +205,13 @@ const Ticket = () => {
         </div>
 
         {/* Download Button */}
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center my-6">
           <Button 
             type="primary" 
             size="large" 
             icon={<i className="fas fa-download"></i>} 
             onClick={downloadPDF}
-            className="w-full md:w-1/4 text-lg"
+            className="w-full md:w-1/4 text-lg bg-purple-700 hover:bg-purple-800"
           >
             Download PDF
           </Button>
@@ -180,3 +222,4 @@ const Ticket = () => {
 };
 
 export default Ticket;
+
